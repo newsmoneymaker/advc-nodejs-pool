@@ -1,0 +1,17 @@
+[Unit]
+Description=AdventureCoin pool: charts data collector (hash rate, difficulty, miners, workers on the home page)
+After=advc-pool-redis.service advc-pool-api.service
+Requires=advc-pool-redis.service
+[Service]
+Type=simple
+User=advcpool
+WorkingDirectory=/opt/advc-nodejs-pool
+ExecStart=/usr/bin/node /opt/advc-nodejs-pool/init.js -module=chartsDataCollector
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

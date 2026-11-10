@@ -1,0 +1,6 @@
+node_modules/
+logs/*.log
+STOP_PAYMENTS
+config.json
+rpc.pass
+WALLET_BACKUP_*.txt

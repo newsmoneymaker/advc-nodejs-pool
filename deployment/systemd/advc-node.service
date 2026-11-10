@@ -1,0 +1,19 @@
+[Unit]
+Description=AdventureCoin node (adventurecoind): the chain, the block templates and the pool wallet
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=advcpool
+# adventurecoin.conf: server=1, listen=1, rpcuser/rpcpassword, rpcbind=127.0.0.1, rpcport=9982, port=5403, wallet=pool, addnode=<peers>, see docs/INSTALL.md
+ExecStart=/opt/advc/bin/adventurecoind -datadir=/opt/advc/data -conf=/opt/advc/data/adventurecoin.conf -printtoconsole=0
+Restart=on-failure
+RestartSec=30
+LimitNOFILE=65536
+TimeoutStopSec=180
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+[Unit]
+Description=AdventureCoin pool: stratum server (miners, share checking with the yphash helper, block submission)
+After=advc-pool-redis.service advc-node.service
+Requires=advc-pool-redis.service
+[Service]
+Type=simple
+User=advcpool
+WorkingDirectory=/opt/advc-nodejs-pool
+ExecStart=/usr/bin/node /opt/advc-nodejs-pool/init.js -module=pool
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+# ports below 1024 need this:
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target
